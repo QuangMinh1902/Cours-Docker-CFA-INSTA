@@ -4,13 +4,13 @@ const app = express();
 const port = 3000;
 const bodyParser = require("body-parser");
 
-const directoryServerUrl = "http://localhost:5000";
+const directoryServerUrl = "http://app-server3:5000";
 let server2Url;
 
 // Informer le serveur annuaire de son adresse
 axios.post(`${directoryServerUrl}/register`, {
   serverName: "Server1",
-  address: `http://localhost:${port}`,
+  address: `http://app-server1:${port}`,
 });
 
 app.get("/", async (req, res) => {
@@ -50,6 +50,6 @@ app.post("/", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server 1 is running on http://localhost:${port}`);
+app.listen(port,"0.0.0.0", () => {
+  console.log(`Server 1 is running on http://0.0.0.0:${port}`);
 });
