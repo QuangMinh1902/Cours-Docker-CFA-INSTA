@@ -4,11 +4,14 @@ services:
     build:
       context: .
       dockerfile: ./dockerfiles/server1.dockerfile
+    deploy:
+      replicas: 3
     ports:
-      - "3000:3000"
+      - "3500-3502:3000"
     networks:
       - my-network
     depends_on:
+      - app-server2
       - directory-server
       - relay-server
 
@@ -16,8 +19,10 @@ services:
     build:
       context: .
       dockerfile: ./dockerfiles/server2.dockerfile
+    deploy:
+      replicas: 3
     ports:
-      - "4000:4000"
+      - "4500-4502:4000"
     networks:
       - my-network
     depends_on:
@@ -25,7 +30,7 @@ services:
       - relay-server
 
   directory-server:
-    container_name: app-server3
+    # container_name: app-server3
     build:
       context: .
       dockerfile: ./dockerfiles/server3.dockerfile
@@ -35,7 +40,7 @@ services:
       - my-network
 
   relay-server:
-    container_name: relay-server
+    # container_name: relay-server
     build:
       context: .
       dockerfile: ./dockerfiles/relayServer.dockerfile

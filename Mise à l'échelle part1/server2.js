@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const axios = require("axios");
 
 const port = 4000;
-const directoryServerUrl = "http://app-server3:5000";
+const directoryServerUrl = "http://directory-server:5000";
 
 // Informer le serveur annuaire de son adresse
 axios.post(`${directoryServerUrl}/register`, {
@@ -24,6 +24,7 @@ app.post("/", async (req, res) => {
       serverName: "Server1",
     });
     const server1Url = response.data.address;
+    console.log(server1Url);
 
     // Attendre une demi-seconde avant d'envoyer la requête "ping" vers le serveur 1
     setTimeout(async () => {
@@ -40,5 +41,5 @@ app.post("/", async (req, res) => {
 });
 
 app.listen(port, "0.0.0.0", () => {
-  console.log(`Server 2 is running on http://0.0.0.0:${port}`);
+  // console.log(`Server 2 is running on http://0.0.0.0:${port}`);
 });

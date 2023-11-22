@@ -12,7 +12,7 @@ app.post("/", async (req, res) => {
   if (destination && message) {
     try {
       // Obtenez l'adresse du serveur de destination depuis le serveur annuaire
-      const response = await axios.post(`http://app-server3:5000/getAddress`, {
+      const response = await axios.post(`http://directory-server:5000/getAddress`, {
         serverName: destination,
       });
       const destinationUrl = response.data.address;

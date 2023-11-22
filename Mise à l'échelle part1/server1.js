@@ -2,9 +2,10 @@ const express = require("express");
 const axios = require("axios");
 const app = express();
 const port = 3000;
+// console.log(port)
 const bodyParser = require("body-parser");
 
-const directoryServerUrl = "http://app-server3:5000";
+const directoryServerUrl = "http://directory-server:5000";
 let server2Url;
 
 // Informer le serveur annuaire de son adresse
@@ -54,5 +55,5 @@ app.post("/", async (req, res) => {
 });
 
 app.listen(port, "0.0.0.0", () => {
-  console.log(`Server 1 is running on http://0.0.0.0:${port}`);
+  // console.log(`Server 1 is running on http://0.0.0.0:${port}`);
 });
