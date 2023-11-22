@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: ./dockerfiles/server1.dockerfile
-    deploy:
+    deploy: # create 3 instance of server 1
       replicas: 3
     ports:
       - "3500-3502:3000"
@@ -19,7 +19,7 @@ services:
     build:
       context: .
       dockerfile: ./dockerfiles/server2.dockerfile
-    deploy:
+    deploy: # create 3 instance of server 2
       replicas: 3
     ports:
       - "4500-4502:4000"
@@ -30,7 +30,6 @@ services:
       - relay-server
 
   directory-server:
-    # container_name: app-server3
     build:
       context: .
       dockerfile: ./dockerfiles/server3.dockerfile
@@ -40,7 +39,6 @@ services:
       - my-network
 
   relay-server:
-    # container_name: relay-server
     build:
       context: .
       dockerfile: ./dockerfiles/relayServer.dockerfile
