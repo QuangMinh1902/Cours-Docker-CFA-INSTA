@@ -1,0 +1,53 @@
+version: "3"
+services:
+  app-server1:
+    container_name: app-server1
+    build:
+      context: .
+      dockerfile: ./dockerfiles/server1.dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - my-network
+    depends_on:
+      - directory-server
+      - relay-server
+
+  app-server2:
+    container_name: app-server2
+    build:
+      context: .
+      dockerfile: ./dockerfiles/server2.dockerfile
+    ports:
+      - "4000:4000"
+    networks:
+      - my-network
+    depends_on:
+      - directory-server
+      - relay-server
+
+  directory-server:
+    container_name: app-server3
+    build:
+      context: .
+      dockerfile: ./dockerfiles/server3.dockerfile
+    ports:
+      - "5000:5000"
+    networks:
+      - my-network
+
+  relay-server:
+    container_name: relay-server
+    build:
+      context: .
+      dockerfile: ./dockerfiles/relayServer.dockerfile
+    ports:
+      - "6000:6000"
+    networks:
+      - my-network
+    depends_on:
+      - directory-server
+
+networks:
+  my-network:
+    driver: bridge
