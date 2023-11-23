@@ -1,0 +1,54 @@
+version: "3"
+services:
+  app-server1:
+    build:
+      context: .
+      dockerfile: ./dockerfiles/server1.dockerfile
+    deploy: # create 3 instance of server 1
+      replicas: 3
+    ports:
+      - "3500-3502:3000"
+    networks:
+      - my-network
+    depends_on:
+      - app-server2
+      - directory-server
+      - relay-server
+
+  app-server2:
+    build:
+      context: .
+      dockerfile: ./dockerfiles/server2.dockerfile
+    deploy: # create 3 instance of server 2
+      replicas: 3
+    ports:
+      - "4500-4502:4000"
+    networks:
+      - my-network
+    depends_on:
+      - directory-server
+      - relay-server
+
+  directory-server:
+    build:
+      context: .
+      dockerfile: ./dockerfiles/server3.dockerfile
+    ports:
+      - "5000:5000"
+    networks:
+      - my-network
+
+  relay-server:
+    build:
+      context: .
+      dockerfile: ./dockerfiles/relayServer.dockerfile
+    ports:
+      - "6000:6000"
+    networks:
+      - my-network
+    depends_on:
+      - directory-server
+
+networks:
+  my-network:
+    driver: bridge
