@@ -29,4 +29,9 @@ On veux maintenant que le serveur envoie "pong" au serveur "ping" chacun leurs t
 
 2. Créer un serveur gateway qui envoie son adresse au serveur 3 et qui doit retransmettre le message aux serveurs "ping" chacun leurs tours.
 
+Sécurité
+On voudrait ajouter une couche de sécurité, qui isolerait les instances de serveurs 2 pour qu'il n'accepte de requêtes seulement de la gateway.
+
+3. Modifier les réseaux pour seulement connecter les serveurs 2 à la gateway. La gateway devra continuer à répondre aux requêtes du serveur 4.
+
 ![](./img/fig6.png)
